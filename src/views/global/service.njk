@@ -1,0 +1,86 @@
+{% extends 'layout.njk' %} 
+{% set title = 'SERVICES' %} 
+{% set pageKey = 'service' %}
+{% set pathUrl = "services?active_category="+active_category %}
+{% import "../components/pagination.njk" as PaginationComponent %}
+{% block content %}
+
+        <!-- section hero start -->
+        <section class="hero d-flex jc-c ai-c">
+            <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+            <div class="wrapper">
+                <h1>Nos services</h1>
+            </div>
+        </section>
+        <!-- section hero end -->
+        <!-- section services start -->
+        <section class="services d-flex jc-c ai-c">
+            <div class="wrapper">
+                <div class="services_wrapper_desc">
+                    <div class="section_title">
+                        <h2 class="title_text">Les services securex</h2>
+                    </div>
+                    <div class="services_content_text">
+                        <p>lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun doll or sit
+                            ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun doll
+                            or sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun
+                            doll or sit ammet or sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor sit ammet lorem ipsun dollor
+                            sit ammet lorem ipsun doll or sit ammet
+                        </p>
+                    </div>
+                </div>
+                <div class="services_categories">
+                    <ul class="d-flex jc-c ai-c">
+                        <li><a class="{{'active' if active_category == 'all' else ''}}" href="/services" >Tout</a></li>
+                        {% for categorie in categories %}
+                        <li><a class="{{'active' if categorie.name == active_category  else ''}}" href="/services?active_category={{categorie.name}}" >{{ categorie.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="services_content" id="services_list">
+                    {% if services.length > 0 %}
+                        {% for service in services %}
+                            {% if (loop.index % 2) == 0 %}
+                                <div class="services_content_card">
+                                    <img src="/static{{ service.cover }}" alt="image decrivant le service de l'entreprise">
+                                    <div class="service_card_content">
+                                        <small>{{ service.cat_id.name }}</small>
+                                        <h1 class="service_card_content_title">{{ service.title }}</h1>
+                                        <p>{{ service.description }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="services_content_card wrap-reverse">
+                                    <div class="service_card_content">
+                                        <small>{{ service.cat_id.name }}</small>
+                                        <h1 class="service_card_content_title">{{ service.title }}</h1>
+                                        <p>{{ service.description }}</p>
+                                    </div>
+                                    <img src="/static{{ service.cover }}" alt="image decrivant le service de l'entreprise">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {{ PaginationComponent.Pagination(pathUrl,numberOfLinks,numberOfLinks,pages, "services_list") }}
+                    {% else %}
+                        <p style="text-align:center;">Aucun service !</p>
+                    {% endif %}
+
+                </div>
+
+                <div class="services_footer d-flex jc-c ai-c">
+                    <div class="wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96.875" height="96.875" viewBox="0 0 96.875 96.875">
+                            <path id="Icon_awesome-smile-wink" data-name="Icon awesome-smile-wink" d="M0,50A48.438,48.438,0,1,0,48.438,1.563,48.429,48.429,0,0,0,0,50Zm39.063-9.375a6.25,6.25,0,1,1-6.25-6.25A6.243,6.243,0,0,1,39.063,40.625ZM70.02,43.848c-2.891-2.578-9.023-2.578-11.914,0l-1.855,1.66A2.34,2.34,0,0,1,52.383,43.4c.781-4.922,6.68-8.223,11.7-8.223S75,38.477,75.781,43.4a2.34,2.34,0,0,1-3.867,2.109ZM30.82,63.633a22.949,22.949,0,0,0,35.234,0c2.656-3.164,7.441.82,4.8,4a29.194,29.194,0,0,1-44.844-.02C23.379,64.434,28.2,60.449,30.82,63.633Z" transform="translate(0 -1.563)"/>
+                          </svg>
+                        <p>Gagner en sérénité et vous concentrer sur vos véritables priorités.
+                            <br> Grâce à notre expertise et à notre savoir-faire, vous pourrez économiser de l'argent.
+                            <br> Engagez un professionnel pour s’occuper de vos assurances à votre place.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- section services end -->
+
+ {% endblock %}

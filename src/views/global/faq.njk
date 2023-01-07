@@ -1,0 +1,104 @@
+
+{% extends 'layout.njk' %} 
+{% set title = 'FAQ' %} 
+{% set pageKey = 'faq' %}
+{% block content %}
+
+        <!-- section hero start -->
+        <section class="hero d-flex jc-c ai-c">
+            <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+            <div class="wrapper">
+                <h1>Des questions ?</h1>
+            </div>
+        </section>
+        <!-- section hero end -->
+
+        <!-- section message wall start -->
+        <section class="message_wall jc-c ai-c">
+            <div class="wrapper">
+                {# lister les questions #}
+                {% for q in questions %}
+                    {% if q.response %}
+                        <div class="incomming d-flex ai-s jc-c">
+                            <span class="incomming_profil">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="31.5" viewBox="0 0 31.5 31.5">
+                                    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M29.25,14.625H19.125V4.5a2.25,2.25,0,0,0-2.25-2.25h-2.25a2.25,2.25,0,0,0-2.25,2.25V14.625H2.25A2.25,2.25,0,0,0,0,16.875v2.25a2.25,2.25,0,0,0,2.25,2.25H12.375V31.5a2.25,2.25,0,0,0,2.25,2.25h2.25a2.25,2.25,0,0,0,2.25-2.25V21.375H29.25a2.25,2.25,0,0,0,2.25-2.25v-2.25A2.25,2.25,0,0,0,29.25,14.625Z" transform="translate(0 -2.25)" fill="#fff"/>
+                                </svg>
+                            </span>
+                            <div class="incomming_question p-relative">
+                                <i class="fa-regular fa-play p-absolute"></i>
+                                <p>{{ q.question }}</p>
+                            </div>
+                        </div>
+                        <div class="outcomming d-flex ai-s jc-c">
+                            <div class="outcomming_question p-relative">
+                                <i class="fa-regular fa-play p-absolute"></i>
+                                <p><p>{{ q.response }}</p></p>
+                            </div>
+                            <span class="outcomming_profil">
+                                <img src="/static/assets/images/logo.png" alt="logo de l'entrprise">
+                            </span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {# fin #}
+                <div class="incomming d-flex ai-s jc-c">
+                    <span class="incomming_profil">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="31.5" viewBox="0 0 31.5 31.5">
+                            <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M29.25,14.625H19.125V4.5a2.25,2.25,0,0,0-2.25-2.25h-2.25a2.25,2.25,0,0,0-2.25,2.25V14.625H2.25A2.25,2.25,0,0,0,0,16.875v2.25a2.25,2.25,0,0,0,2.25,2.25H12.375V31.5a2.25,2.25,0,0,0,2.25,2.25h2.25a2.25,2.25,0,0,0,2.25-2.25V21.375H29.25a2.25,2.25,0,0,0,2.25-2.25v-2.25A2.25,2.25,0,0,0,29.25,14.625Z" transform="translate(0 -2.25)" fill="#fff"/>
+                          </svg>
+                    </span>
+                    <div class="incomming_question p-relative">
+                        <i class="fa-regular fa-play p-absolute"></i>
+                        <p>Comment SECURIX procède pour faire baisser le coût de l’assurance de son client ?</p>
+                    </div>
+                </div>
+                <div class="outcomming d-flex ai-s jc-c">
+                    <div class="outcomming_question p-relative">
+                        <i class="fa-regular fa-play p-absolute"></i>
+                        <p>Par son expertise, SECURIX utilise des comparaisons de prix des assureurs pour trouver la couverture souhaitée en prenant en compte les contraintes budgétaires de son client. </p>
+                    </div>
+                    <span class="outcomming_profil">
+                        <img src="/static/assets/images/logo.png" alt="logo de l'entrprise">
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- section message wall end -->
+
+
+        <!-- section form start -->
+        <section class="form d-flex jc-c ai-c">
+            <div class="wrapper">
+                <h1 class="form_title"><span>soumettre</span> votre <span>question</span></h1>
+                <div class="d-flex jc-c ai-s">
+                    <div class="securex_info">
+                        <img src="/static/assets/images/questions.png" alt="">
+                    </div>
+                    <div class="form_content">
+                        <form action="/request" id="requestForm">
+                            <div class="form_item">
+                                <input type="text" name="name" id="name" placeholder="votre nom">
+                            </div>
+                            <div class="form_item">
+                                <input type="email" name="email" id="email" placeholder="votre email">
+                            </div>
+                            <div class="form_item">
+                                <textarea name="message" id="message" cols="30" rows="10" placeholder="votre message"></textarea>
+                            </div>
+                            <button class="btn btn-main" type="submit">
+                                <span>Envoyer</span>
+                                <img src="/static/assets/images/spinner.gif" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- section form end -->
+
+ {% endblock %}
+ {% block js %} 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/assets/js/faq.js" type="module"></script>
+ {% endblock %}

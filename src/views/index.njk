@@ -1,0 +1,164 @@
+{% extends 'layout.njk' %} 
+{% set title = 'Home' %} 
+{% set pageKey = 'home' %} 
+{% set isActive = 'home' %} 
+{% block content %}
+
+<!-- section hero start -->
+<section class="hero d-flex jc-c ai-c">
+    <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+    <div class="wrapper">
+        <h1>Avec <span>SECUREX</span> <br> assurer vous en toute sécurité .</h1>
+        <p>Nous vous offrons des services de qualité irréprochable dans la recherche des couvertures d’assurance et de réassurance en adéquation avec vos besoins pertinents. Grâce à notre expertise et à notre savoir-faire, vous pourrez économiser de l'argent,
+            gagner en sérénité et vous concentrer sur vos véritables priorités. </p>
+        <a href="#" class="btn bn-main">Commencer</a>
+    </div>
+</section>
+<!-- section hero end -->
+<!-- section services start -->
+<section class="services d-flex jc-c ai-c">
+    <div class="wrapper">
+        <div class="section_title">
+            <h2 class="title_text">nos services</h2>
+            <span class="title_background">services</span>
+        </div>
+        <div class="services_content_text">
+            <p>SECURIX ASSURANCES de grandes ambitions pour sa clientèle à travers son engagement à offrir des services de qualité irréprochable dans la recherche des couvertures d’assurance et de réassurance en adéquation avec les besoins pertinents des
+                clients.</p>
+        </div>
+        <div class="services_content d-grid gap-1">
+            {% for service in services %}
+                <div class="services_content_card">
+                    <img src="/static{{service.cover}}" alt="image decrivant le service de l'entreprise">
+                    <a href="#" class="services_content_card_text">{{ service.title }}</a>
+                    {# <a href="#" class="services_content_card_text">Le règlement <span>rapide des sinistres</span></a> #}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- section services end -->
+<!-- section divider start -->
+<section class="divider bg-main d-flex jc-c ai-c">
+    <div class="wrapper">
+        <h1>Rejoignez-nous vite !</h1>
+        <p>Pour rejoindre Securex, choisissez la couverture qui s’applique à votre situation. Vous pourrez recevoir un devis et vous inscrire dans la foulée.</p>
+    </div>
+</section>
+<!-- section divider end -->
+<!-- section atouts start -->
+<section class="atouts d-flex jc-c ai-c">
+    <div class="wrapper">
+        <div class="section_title">
+            <h2 class="title_text">nos atouts</h2>
+            <span class="title_background">atouts</span>
+        </div>
+        <div class="atouts_content">
+            <div class="atout_card">
+                <div class="atout_wrapper">
+                    <img class="atout_img" src="/static/assets/images/atouts/icons8-radio-waves-70.png" alt="">
+                    <h2 class="atout_title">L'ecoute</h2>
+                    <p class="atout_desc">L'écoute est un élément clé à SECURIX ASSURANCES qui nous permet de mieux cerner les besoins de notre clientèle et d'y répondre favorablement.</p>
+                </div>
+            </div>
+            <div class="atout_card">
+                <div class="atout_wrapper">
+                    <img class="atout_img" src="/static/assets/images/atouts/icons8-home-70.png" alt="">
+                    <h2 class="atout_title">PROXIMITÉ</h2>
+                    <p class="atout_desc">Nous restons proches de vous à la souscription des contrats comme à la survenance des sinistres.</p>
+                </div>
+            </div>
+            <div class="atout_card">
+                <div class="atout_wrapper">
+                    <img class="atout_img" src="/static/assets/images/atouts/icons8-handshake-70.png" alt="">
+                    <h2 class="atout_title">LOYAUTÉ</h2>
+                    <p class="atout_desc">Le respect des engagements est un principe à SECURIX ASSURANCES. LE CLIENT est notre raison d’être. Nous lui assurons en permanence la TRANQUILLITÉ D’ESPRIT.</p>
+                </div>
+            </div>
+            <div class="atout_card">
+                <div class="atout_wrapper">
+                    <img class="atout_img" src="/static/assets/images/atouts/icons8-innovation-70.png" alt="">
+                    <h2 class="atout_title">INNOVATION</h2>
+                    <p class="atout_desc">Des solutions appropriées aux besoins de nos clients, SECURIX ASSURANCES, de concert avec ses partenaires, recherchera des solutions de couverture innovantes.</p>
+                </div>
+            </div>
+            <div class="atout_card">
+                <div class="atout_wrapper">
+                    <img class="atout_img" src="/static/assets/images/atouts/icons8-user-groups-70.png" alt="">
+                    <h2 class="atout_title">PROFESSIONNALISME</h2>
+                    <p class="atout_desc">Nous avons des collaborateurs bien formés et ayant plusieurs années d’expérience professionnelle qui sauront trouver, à chaque cas, la solution idoine.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section atouts end -->
+<!-- section atouts start -->
+<section class="about d-flex jc-c ai-c">
+    <div class="wrapper">
+        <div class="section_title">
+            <h2 class="title_text">securex</h2>
+            <span class="title_background">A PROPOS</span>
+        </div>
+        <div class="about_content d-flex jc-c ai-s">
+            <div class="about_img">
+                <img src="/static/assets/images/about.jpg" alt="image decrivant la section a propos de l'etreprise">
+            </div>
+            <div class="about_text">
+                <h1 class="about_title">Qui sommes nous ?</h1>
+                <p>Partenaire conseil engagé depuis plusieurs année auprès des acteurs de l’Assurance, SECURIX ASSURANCE accompagne ses clients dans leurs projets de transformation stratégique, organisationnelle ou réglementaire, dans la digitalisation de
+                    leurs systèmes d’information et de leurs processus métiers, et assure un accompagnement opérationnel.</p>
+                <a href="/contact" class="btn bn-main">Contacter Nous</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section abouts end -->
+<!-- section divider start -->
+<section class="divider statistique bg-main d-flex jc-c ai-c">
+    <div class="wrapper d-flex jc-c ai-c">
+        <h1>Nos <br> statistiques</h1>
+        <div class="stats d-flex jc-betw ai-c">
+            <span class="stat">10K <br> clients</span>
+            <span class="stat">10K <br> clients</span>
+            <span class="stat">10K <br> clients</span>
+            <span class="stat">10K <br> clients</span>
+        </div>
+    </div>
+</section>
+<!-- section divider end -->
+<!-- section blog start -->
+<section class="blog d-flex jc-c ai-c">
+    <div class="wrapper">
+        <div class="blog_title d-flex jc-betw ai-c">
+            <div class="section_title">
+                <h2 class="title_text">nos articles</h2>
+                <span class="title_background">Blog</span>
+            </div>
+
+            <div class="arrows d-flex jc-c ai-c">
+                <span class="left">
+                    <i class="fa-solid fa-angle-left"></i>
+                </span>
+                <span class="right">
+                    <i class="fa-solid fa-angle-right"></i>
+                </span>
+            </div>
+        </div>
+        {% import "./components/article_card.njk" as BlogCard %}
+        <div class="article_list owl-carousel">
+            {# lister les questions #}
+                    {% for art in articles %}
+                        <div class="card_wrapper">
+                            {{ BlogCard.BlogCard(art) }}
+                        </div>
+                    {% endfor %}
+                    {# fin #}
+        </div>
+        <div class="blog_footer">
+            <a href="/blog">voir plus ?</a>
+        </div>
+    </div>
+</section>
+<!-- section blog end -->
+{% endblock %}

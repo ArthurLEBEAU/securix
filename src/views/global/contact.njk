@@ -1,0 +1,78 @@
+{% extends 'layout.njk' %} 
+{% set title = 'CONTACT' %} 
+{% set pageKey = 'contact' %}
+{% block content %}
+
+<!-- section hero start -->
+        <section class="hero d-flex jc-c ai-c">
+            <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+            <div class="wrapper">
+                <h1>Nous contacter</h1>
+            </div>
+        </section>
+        <!-- section hero end -->
+
+        <!-- section map start -->
+        <section class="map d-flex jc-c ai-c">
+            <div class="wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d127121.18286222382!2d-3.9709149!3d5.3346614!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ea5311959121%3A0x3fe70ddce19221a6!2sAbidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sen!2scm!4v1670231708561!5m2!1sen!2scm"
+                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+        <!-- section map end -->
+
+
+        <!-- section form start -->
+        <section class="form d-flex jc-c ai-c">
+            <div class="wrapper">
+                <h1 class="form_title">ENVOYER UN MESSAGE</h1>
+                <div class="d-flex jc-c ai-s">
+                    <div class="securex_info">
+                        <div class="info_item d-flex ai-c jc-s">
+                            <div class="info_img"><img src="/static/assets/images/icons/icon_phone.png" alt="icone d'un telephone"></div>
+                            <div class="info_item_desc">
+                                <span>+225 07 97 46 29 92 <br> +225 07 02 98 12 17</span>
+                            </div>
+                        </div>
+                        <div class="info_item d-flex ai-c jc-s">
+                            <div class="info_img"><img src="/static/assets/images/icons/icon_mail.png" alt="icone d'une envellope"></div>
+                            <div class="info_item_desc">
+                                <span>frnanafr@yahoo.fr</span>
+                            </div>
+                        </div>
+                        <div class="info_item d-flex ai-c jc-s">
+                            <div class="info_img"><img src="/static/assets/images/icons/icon_location.png" alt="icone de location"></div>
+                            <div class="info_item_desc">
+                                <span>Abidjan-Cocody, <br>
+                                    7ᵉ Tranche-sortie du pont Soro</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_content" >
+                        <form action="#" id="msgForm">
+                            <div class="form_item">
+                                <input type="text" name="name" id="name" placeholder="votre nom">
+                            </div>
+                            <div class="form_item">
+                                <input type="email" name="email" id="email" placeholder="votre email">
+                            </div>
+                            <div class="form_item">
+                                <textarea name="message" id="message" cols="30" rows="10" placeholder="votre message"></textarea>
+                            </div>
+                            <button class="btn btn-main" type="submit">
+                                <span>Envoyer</span>
+                                <img src="/static/assets/images/spinner.gif" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- section form end -->
+
+ {% endblock %}
+
+  {% block js %} 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/assets/js/contact.js" type="module"></script>
+ {% endblock %}

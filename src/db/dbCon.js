@@ -1,6 +1,7 @@
-import 'dotenv/config';
+import 'dotenv/config'
 
-import mysql2 from 'mysql2/promise';
+import mongoose from 'mongoose'
+import * as models from '../models/index.js'
 
 /**
  *create an instance of database connexion
@@ -11,43 +12,53 @@ import mysql2 from 'mysql2/promise';
 export default class DBConnexion {
     constructor() {
         this.connection = null
+        this.uri = `mongodb://${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+        this.option = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
     }
 
-    async createConnection(){
-        this.connection = await mysql2.createConnection({
-            host: process.env.HOST || "localhost",
-            user: process.env.DB_USERNAME || 'root',
-            password: process.env.DB_MDP || "",
-            database: process.env.DB_NAME || 'test'
-        });
-    }
     /**
-    * get connexion to execute operation
-    *
-    * @memberof DBConnexion
-    * @return void
-    */
-    async getConnection(){
-        if (this.connection == null ||  this.connection.threadId) return;
-        await this.connection.connect((err) => {
-            console.error(err != null ? err.sqlMessage : '');
-            return;
-        });
-        console.log('connected as id ' + this.connection.threadId);
+     * 
+     * @param {boolean} reset 
+     */
+    async createConnection(reset = false) {
+        try {
+            // get the mongoose connexion
+            await mongoose.connect(this.uri, this.option)
+                .then((c) => {
+                    this.connection = c
+                    if (reset) this.initDb()
+                }).catch((er) => {
+                    throw er
+                })
+            console.log('connexion reussit!!!')
+        } catch (error) {
+            console.error('connexion refused !!!', error)
+        }
     }
-    /**
-     *
-     *
-     * @memberof DBConnexion
-     * @return void
-    */
-    removeConnection(){
-        if (this.connection == null ) return;
-        this.connection.destroy((err) => {
-            console.error('error disconnecting: ' + err.stack);
-            return;
-        });
-        this.connection = null;
-        console.log('connexion removed !!!', this.connection);
+
+    initDb() {
+            const d = {...models }
+            Object.keys(d).forEach((el, i) => {
+                const p = Object.values(d)[i]
+                this.connection.model(p.modelName, p.schema)
+            })
+        }
+        /**
+         *
+         *
+         * @memberof DBConnexion
+         * @return void
+         */
+    async removeConnection() {
+        if (this.connection == null) return
+        this.connection.disconnect().then(() => {
+            this.connection = null
+            console.log('connection removed !!')
+        }).catch(err => {
+            console.error('error disconnecting: ' + err)
+        })
     }
 }

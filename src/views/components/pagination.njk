@@ -1,0 +1,72 @@
+
+{% macro Pagination(base_url,numberOfLinks,pages,activePage, id) %}
+    {% if numberOfLinks > pages %}
+        {% set numberOfLinks = pages %}
+    {% endif %}
+    {% set delta = (numberOfLinks / 2)|round(0, 'floor') %}
+    {% set visibleRangeStart = activePage - delta %}
+    {% set visibleRangeEnd = activePage + delta %}
+    {% if numberOfLinks % 2 == 0 %}
+        {% set visibleRangeEnd = visibleRangeEnd - 1 %}
+    {% endif %}
+    {% if visibleRangeStart < 1 %}
+        {% set visibleRangeEnd = visibleRangeEnd - visibleRangeStart + 1 %}
+    {% endif %}
+    {% if visibleRangeEnd > pages %}
+        {% set visibleRangeStart = visibleRangeStart - visibleRangeEnd + pages %}
+    {% endif %}
+    {% if 1 > visibleRangeStart %}
+        {% set visibleRangeStart = 1 %}
+    {% endif %}
+    {% if pages < visibleRangeEnd %}
+        {% set visibleRangeEnd = pages %}
+    {% endif %}
+    {% if visibleRangeStart > 2 %}
+        {% set hasLess = true %}
+    {% endif %}
+    {% if visibleRangeEnd + 1 < pages %}
+        {% set hasMore = true %}
+    {% endif %}
+    <nav class="pagination" role="doc-pagelist">
+        <ul class="pagination__list">
+            {% if activePage > 1 %}
+                <li class="pagination__item">
+                    <a class="pagination__link pagination__link--previous" href="/{{base_url}}pageNumber={{activePage-1}}#{{id}}">{{"<"}}</a>
+                </li>
+            {% endif %}
+            {% for i in range(1, pages + 1) %}
+                {% if i >= visibleRangeStart  and i <= visibleRangeEnd %}
+                    {% if i == visibleRangeStart and visibleRangeStart != 1 %}
+                        <li class="pagination__item pagination__item--first">
+                            <a class="pagination__link" href="/{{base_url}}pageNumber={{i}}#{{id}}">1</a>
+                        </li>
+                        {% if hasLess %}
+                            <li class="pagination__item pagination__item--more">...</li>
+                        {% endif %}
+                    {% endif %}
+
+                    <li class="pagination__item{% if i == activePage %} is-active{% endif %}">
+                        {% if i == activePage %}
+                            {{ i }}
+                        {% else %}
+                            <a class="pagination__link" href="/{{base_url}}?pageNumber={{i}}#{{id}}">{{ i }}</a>
+                        {% endif %}
+                    </li>
+                    {% if i == visibleRangeEnd and visibleRangeEnd != pages %}
+                        {% if hasMore %}
+                            <li class="pagination__item pagination__item--more">...</li>
+                        {% endif %}
+                        <li class="pagination__item pagination__item--last">
+                            <a class="pagination__link" href="/{{base_url}}?pageNumber={{pages}}#{{id}}">{{ pages }}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if activePage < pages %}
+                <li class="pagination__item">
+                    <a class="pagination__link pagination__link--next" href="/{{base_url}}?pageNumber={{activePage+1}}#{{id}}">{{">"}}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endmacro %}

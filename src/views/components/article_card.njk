@@ -1,0 +1,16 @@
+
+{% macro BlogCard(art) %}
+<div class="blog_card">
+    <div class="blog_card_header">
+        <div class="blog_header_date">
+            <span class="blog_header_date_day" data-val="{{ art.updated_at }}">12</span>
+            <span class="blog_header_date_month" data-val="{{ art.updated_at }}">DEC</span>
+        </div>
+        <img src="/static{{ art.cover }}" alt="photo de couverture de l'article">
+    </div>
+    <div class="blog_card_content">
+        <h1 class="blog_content_title"><a href="/blog/{{ art._id }}">{{ art.title | truncate(65) }}</a></h1>
+        <p class="blog_content_text">{{ art.resume | truncate(65) }}</p>
+    </div>
+</div>
+{% endmacro %}

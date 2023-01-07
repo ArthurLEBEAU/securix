@@ -1,0 +1,55 @@
+{% extends 'layout.njk' %} 
+{% set title = 'BLOG' %} 
+{% set pageKey = 'blog' %}
+{% block content %}
+{% import "../components/article_card.njk" as BlogCard %}
+{% import "../components/pagination.njk" as PaginationComponent %}
+
+<!-- section hero start -->
+        <section class="hero d-flex jc-c ai-c">
+            <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+            <div class="wrapper">
+                <h1>Nos articles</h1>
+            </div>
+        </section>
+        <!-- section hero end -->
+
+
+        <!-- section intro start -->
+        <section class="intro d-flex jc-c ai-c">
+            <div class="wrapper d-flex jc-c ai-c">
+                <div class="intro_text">
+                    <h2>L'Actualité Et Les Dernières Citations De L'Agence</h2>
+                    <p>Toute l'actualité dans l'univers du numérique et de l'agence, des articles sur des sujets qui vous passionnent et/ou sur lesquels vous vous posez des questions, des éclaircissements sur les services que nous offrons, un partage d'expérience,
+                        des conseils pratiques... Il y'en a pour tous les goûts dans SoftEngine Blog; Oui, vous êtes au bon endroit.</p>
+                </div>
+                <div class="intro_img">
+                    <img src="/static/assets/images/undraw_Bibliophile_hwqc.png" alt="">
+                </div>
+            </div>
+        </section>
+        <!-- section intro end -->
+
+        <!-- section blog start -->
+        <section class="blog d-flex jc-c ai-c" id="blog_list">
+            <div class="wrapper">
+                <div class="blog_header">
+                    <div class="form_item">
+                        <input type="text" name="name" id="name" placeholder="votre nom">
+                        <i class="fa-regular fa-search"></i>
+                    </div>
+                </div>
+                <div class="articles_list">
+                    {# lister les questions #}
+                    {% for art in articles %}
+                        {{ BlogCard.BlogCard(art) }}
+                    {% endfor %}
+                    {# fin #}
+                </div>
+
+                {{ PaginationComponent.Pagination("blog",numberOfLinks,numberOfLinks,pages, "blog_list") }}
+            </div>
+        </section>
+        <!-- section blog end -->
+
+ {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'layout.njk' %} 
+{% set title = 'NotFound | 404' %} 
+{% set pageKey = 'NotFound' %} 
+{% set isActive = 'NotFound' %} 
+{% block content %}
+    <section class="d-flex jc-c ai-c">
+        <div class="wrapper not_found_content d-flex jc-c ai-c">
+            <div class="not_found_text">
+                <h1>Oups !</h1>
+                <p>  Vous essayez <br> d'acceder à une page <br> qui n'existe pas .</p>
+                <a href="/" class="">revenir à l'accueil</a>
+            </div>
+            <img src="/static/assets/images/not_found.gif" />
+        </div>
+    </section>
+{% endblock %}

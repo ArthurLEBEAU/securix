@@ -1,0 +1,61 @@
+{% extends 'layout.njk' %} 
+{% set title = 'Blog | Single' %} 
+{% set pageKey = 'single' %}
+{% block content %}
+        <!-- section hero start -->
+        <section class="hero d-flex jc-c ai-c">
+            <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
+            <div class="wrapper">
+                <h1>Plus d'information</h1>
+            </div>
+        </section>
+        <!-- section hero end -->
+        <!-- section intro start -->
+        <section class="intro d-flex jc-c ai-c">
+            <div class="wrapper d-flex jc-s ai-c">
+                <div class="intro_text">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.resume }}</p>
+                    <h3>Contenue</h3>
+                    <p>{{ article.content }}</p>
+                </div>
+                <div class="intro_img">
+                    <img src="/static{{ article.cover }}" alt="">
+                </div>
+            </div>
+        </section>
+        <!-- section intro end -->
+
+        <!-- section blog start -->
+        <section class="blog d-flex jc-c ai-c">
+        {% import "../components/article_card.njk" as BlogCard %}
+            <div class="wrapper">
+                <div class="blog_title d-flex jc-betw ai-c">
+                    <div class="section_title">
+                        <h2 class="title_text">articles</h2>
+                        <span class="title_background">similaire</span>
+                    </div>
+
+                    <div class="arrows d-flex jc-c ai-c">
+                        <span class="left">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </span>
+                        <span class="right">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="article_list owl-carousel">
+                    {# lister les questions #}
+                    {% for art in articles %}
+                        <div class="card_wrapper">
+                            {{ BlogCard.BlogCard(art) }}
+                        </div>
+                    {% endfor %}
+                    {# fin #}
+                </div>
+            </div>
+        </section>
+        <!-- section blog end -->
+        {% endblock %}
+        

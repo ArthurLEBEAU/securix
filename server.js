@@ -2,14 +2,20 @@ import 'dotenv/config';
 import nunjucks from 'nunjucks'
 import bodyParser from 'body-parser';
 import express from 'express';
-import routeApi from './src/routes/api.js';
-import webApi from './src/routes/web.js';
+import apiRoute from './src/routes/api.js';
+import adminRoutes from './src/routes/admin.js';
+import webRoute from './src/routes/web.js';
 import DBConnexion from './src/db/dbCon.js';
 import cors from 'cors';
 import path from "path";
 import { fileURLToPath } from 'url';
 import fileUpload from 'express-fileupload';
 import createHandler from 'express-error-handler';
+import passport from "passport";
+import LocalStrategy from "passport-local";
+import { User } from './src/models/index.js';
+import session from 'express-session'
+// import helmet from 'helmet';
 
 // to et the file name
 const __filename = fileURLToPath(
@@ -30,7 +36,35 @@ await db.createConnection()
 // all allowed origin
 var allowedOrigins = ['http://127.0.0.1:5500/'];
 
-
+// secure header
+// app.use(helmet());
+// setup session and session tips
+// const strategie = function(username, password, done) {
+//     User.findOne({ username: username }, function(err, user) {
+//         if (err) { return done(err); }
+//         if (!user) { return done(null, false); }
+//         if (!user.verifyPassword(password)) { return done(null, false); }
+//         return done(null, user);
+//     });
+// }
+app.set('trust proxy', 1)
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser(function(user, done) {
+    done(null, user._id);
+}));
+passport.deserializeUser(User.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+}));
 // for parsing application/json
 app.use(bodyParser.json())
 
@@ -63,13 +97,13 @@ const handler = createHandler({
 });
 
 // register routes
-app.use(webApi)
-app.use('/api', routeApi)
+app.use("/admin", adminRoutes)
+app.use("/api", apiRoute)
+app.use("/", webRoute)
+
 
 // Handle all unhandled errors:
-
-
 // lauch the server on the specific prot
 app.listen(process.env.PORT || 3001, () => {
-    console.log(`server is listening to port ${process.env.PORT}`)
+    console.log(`server is listening to port http://localhost:${process.env.PORT}`)
 });

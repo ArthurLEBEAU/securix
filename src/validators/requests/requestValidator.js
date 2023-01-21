@@ -23,14 +23,6 @@ export default class RequestValidator extends Validator {
         }
     }
     putSchema = {
-        name: {
-            type: 'string',
-            optional: true
-        },
-        email: {
-            type: 'string',
-            optional: true
-        },
         question: {
             type: 'string',
             optional: true

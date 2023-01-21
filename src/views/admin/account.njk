@@ -1,0 +1,41 @@
+{% extends '../adminLayout.njk' %} 
+{% set title = 'Account' %}  
+{% set isActive = 'account' %} 
+{% set pageKey = 'account' %} 
+ {% block css %} 
+    <link rel="stylesheet" href="/static/assets/css/admin_account.css">
+ {% endblock %}
+{% block content %}
+    <div class="form_wrapper">
+        <form action="/api/account" method="post">
+            <h1>Modifier mes infos</h1>
+            <div class="fom_control">
+                <label for="userName">Nom d'utilisateur</label>
+                <input type="text" required name="userName" id="userName">
+            </div>
+            <div class="fom_control">
+                <label for="password">Ancien mot de passe </label>
+                <div class="pswd_input">
+                    <input type="password" required name="password" id="password">
+                    <img src="/static/assets/images/login/icons8-eye.png" id="icon_show" alt="">
+                </div>
+            </div>
+
+            <div class="fom_control">
+                <label for="confirm">Nouveau mot de passe </label>
+                <div class="pswd_input">
+                    <input type="password" required name="confirm" id="confirm">
+                    <img src="/static/assets/images/login/icons8-eye.png" id="icon_show" alt="">
+                </div>
+            </div>
+
+            <button type="submit">changer</button>
+        </form>
+    </div>
+{% endblock %}
+{% block pop_up %}
+{% endblock pop_up %}
+
+ {% block js %} 
+    <script src="/static/assets/js/api/account.js" type="module"></script>
+ {% endblock %}

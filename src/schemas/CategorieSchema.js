@@ -3,7 +3,7 @@ import Schema from "./schema.js";
 const CategoryShema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     cat_type: {
         type: String,

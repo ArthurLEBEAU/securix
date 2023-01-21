@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "start": "nodemon server",
+        "build": "node build.js",
         "make:controller": "node src/command/createController.js",
         "make:validator": "node src/command/createValidator.js",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,9 +22,18 @@
         "express": "^4.18.1",
         "express-error-handler": "^1.1.0",
         "express-fileupload": "^1.4.0",
+        "express-session": "^1.17.3",
+        "helmet": "^6.0.1",
+        "jsonwebtoken": "^9.0.0",
         "mongoose": "^6.8.1",
         "multer": "^1.4.5-lts.1",
         "nodemon": "^2.0.16",
-        "nunjucks": "^3.2.3"
+        "nunjucks": "^3.2.3",
+        "passport": "^0.6.0",
+        "passport-local": "^1.0.0",
+        "passport-local-mongoose": "^7.1.2"
+    },
+    "devDependencies": {
+        "esbuild": "^0.17.3"
     }
 }

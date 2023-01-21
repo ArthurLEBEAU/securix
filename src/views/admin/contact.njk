@@ -1,0 +1,58 @@
+{% extends '../adminLayout.njk' %} 
+{% set title = 'Contact' %}  
+{% set isActive = 'contact' %} 
+{% set pageKey = 'contact' %} 
+ {% block css %} 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css">
+ {% endblock %}
+{% block content %}
+    <div>
+        <div class="table_header" >
+                        <h3>Message ADMIN</h3>
+
+                        {# <button class="btn_create"><span>Creer</span> <i class="fa fa-plus-circle"></i> </button> #}
+                    </div>
+                    <table id="contactTable" class="table table-striped table-bordered display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>email</th>
+                                <th>Envoyer le</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+    </div>
+{% endblock %}
+{% block pop_up %}
+    <div class="pop_frame">
+        <span class="close_btn"> <i class="fa fa-plus"></i> </span>
+        <form action="#" method="post" id="form_modal">
+            <h1 style="font-size: 1.2rem;font-weight: 700;">Message</h1>
+            <div class="fom_control">
+                <label for="name">Nom</label>
+                <input disabled type="text" required name="name" id="name">
+            </div>
+            <div class="fom_control">
+                <label for="name">Email</label>
+                <input  disabled type="email" required name="email" id="email">
+            </div>
+            <div class="fom_control">
+                <label for="message">Message</label>
+                <textarea disabled name="message" id="message"></textarea>
+            </div>
+        </form>
+    </div>
+
+{% endblock pop_up %}
+
+ {% block js %} 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/assets/js/api/contact.js" type="module"></script>
+ {% endblock %}

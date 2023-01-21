@@ -13,8 +13,9 @@ export default class FileController {
      * @param {String} _path 
      */
     static async saveFile(file, _directory) {
-        const directory = path.dirname('public') + `/public/assets/${_directory}/`
-        const filePath = `${directory}${file.name}`;
+        const directory = path.dirname('public') + `/public/assets/${_directory}/`;
+        const timeStamp = Date.now().toString()
+        const filePath = `${directory}${timeStamp}_${file.name}`;
         const fileTypes = /jpeg|jpg|png|PNG|JPEG|JPG/;
 
         if (file.size > 1000000) {
@@ -30,7 +31,7 @@ export default class FileController {
             }
             await file.mv(filePath);
 
-            return { path: `/assets/${_directory}/${file.name}` }
+            return { path: `/assets/${_directory}/${timeStamp}_${file.name}` }
 
         } catch (error) {
             return { error: error }

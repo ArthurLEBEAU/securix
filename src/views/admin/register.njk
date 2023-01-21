@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/assets/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/assets/css/admin_css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <title>SECUREX-ADMIN | LOGIN</title>
+</head>
+
+<body id="login">
+    <div class="wrapper">
+        <form action="/admin/register" method="post">
+            <h1>CRRER MON COMPTE</h1>
+            <div class="fom_control">
+                <label for="userName">Nom d'utilisateur</label>
+                <input type="text" required name="userName" id="userName">
+            </div>
+            <div class="fom_control">
+                <label for="password">Mot de passe</label>
+                <div class="pswd_input">
+                    <input type="password" required name="password" id="password">
+                    <img src="/static/assets/images/login/icons8-eye.png" id="icon_show" alt="">
+                </div>
+            </div>
+
+            <button type="submit">CREER UN COMPTE</button>
+
+            <a href="/admin/login">Deja administrateur ?</a>
+        </form>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/assets/js/login.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+{% extends '../adminLayout.njk' %} 
+{% set title = 'Service' %}  
+{% set isActive = 'service' %} 
+{% set pageKey = 'service' %} 
+ {% block css %} 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css">
+ {% endblock %}
+{% block content %}
+    <div>
+        <div class="table_header" >
+                        <h3>Service ADMIN</h3>
+
+                        <button class="btn_create"><span>Ajouter</span> <i class="fa fa-plus-circle"></i> </button>
+                    </div>
+                    <table id="serviceTable" class="table table-striped table-bordered display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>image</th>
+                                <th>nom</th>
+                                <th>Create le</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+    </div>
+{% endblock %}
+{% block pop_up %}
+    <div class="pop_frame image_pop_frame">
+        <span class="close_btn"> <i class="fa fa-plus"></i> </span>
+        <form action="#" method="post" id="form_modal">
+            <h1>Nouveau service</h1>
+            <div class="file_system">
+                <div class="fom_control form_img" style="width: 50%;">
+                    <label for="cover">Couverture</label>
+                    <label for="cover">
+                        <img src="/static/assets/images/default_image.jpg"  id="cover_input"/>
+                        <input type="file" style="display: none;" accept="image/*" name="cover" id="cover">
+                    </label>
+                </div>
+
+                <div style="width: 50%;">
+                    <div class="fom_control">
+                        <label for="title">Nom</label>
+                        <input type="text" required name="title" id="title">
+                    </div>
+                    <div class="fom_control">
+                        <label for="category">Categorie</label>
+                        <select name="cat_type" required id="category">
+                            {% for cat in categories %}
+                                <option value="{{cat._id}}">{{cat.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="fom_control">
+                <label for="description">Description</label>
+                <textarea style="height: 150px;" required name="description" id="description"></textarea>
+            </div>
+            <button type="submit">Enregistrer</button>
+
+        </form>
+    </div>
+
+{% endblock pop_up %}
+
+ {% block js %} 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/assets/js/api/service.js" type="module"></script>
+ {% endblock %}

@@ -19,11 +19,10 @@ export default class BlogController {
         try {
             let articles = await Blog.find().populate("cat_id", "name + _id");
             res.status(HttpResponse.OK);
-            return res.send(articles);
+            return res.send({ articles: this.serealize(articles) });
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            console.log("code error ", error)
-            return res.send(error);
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -62,7 +61,7 @@ export default class BlogController {
             data.cover = sf.path
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
 
         try {
@@ -71,7 +70,7 @@ export default class BlogController {
             return res.send(article);
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -90,7 +89,7 @@ export default class BlogController {
                 return res.send(article);
             } else {
                 res.status(HttpResponse.NOT_FOUND);
-                return res.send({ message: `${req.params.id} does not corresponde to any request` })
+                return res.send({ message: `${req.params.id} ne correspond à aucun article` })
             }
         } catch (error) {
             if (error.name == 'CastError') {
@@ -98,8 +97,7 @@ export default class BlogController {
             } else {
                 res.status(HttpResponse.INTERNAL_SERVER_ERROR);
             }
-            console.log(error)
-            return res.send({ message: error.message });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -153,14 +151,14 @@ export default class BlogController {
             let article = await Blog.updateOne({ _id: req.params.id }, data).populate("cat_id", "name + _id");
             if (article.modifiedCount == 1 || article.matchedCount == 1) {
                 res.status(HttpResponse.OK);
-                return res.send({ message: "article modifier avec success!" });
+                return res.send({ message: "article modifié avec success!" });
             } else {
                 res.status(HttpResponse.NOT_FOUND);
-                return res.send({ message: `${req.params.id} does not corresponde to any article` })
+                return res.send({ message: `${req.params.id} ne correspond à aucun article!` })
             }
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -175,7 +173,7 @@ export default class BlogController {
         let article = await Blog.findOne({ _id: req.params.id });
         if (article == null) {
             res.status(HttpResponse.NOT_FOUND);
-            return res.send({ message: `${req.params.id} does not corresponde to any article` })
+            return res.send({ message: `${req.params.id} ne correspond à aucun article!` })
         }
         try {
             let rs = FileController.dropFile(article.cover)
@@ -185,10 +183,36 @@ export default class BlogController {
                 return res.send({ message: rs.error });
             }
             res.status(HttpResponse.OK);
-            return res.send({ message: 'one article removed' });
+            return res.send({ message: 'un article supprimer!' });
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
+    }
+
+    /**
+     * 
+     * @param {Array} sevices 
+     * @returns {Array}
+     */
+    serealize(sevices) {
+        let servV = []
+        sevices.forEach((serv, index) => {
+            servV.push({
+                id: index + 1,
+                _id: serv._id,
+                title: serv.title,
+                cover: serv.cover,
+                resume: serv.resume,
+                content: serv.content,
+                categorie: {
+                    _id: serv.cat_id._id,
+                    name: serv.cat_id.name,
+                },
+                updated_at: (new Date(serv.updated_at)).toLocaleString(),
+            })
+        });
+
+        return servV
     }
 }

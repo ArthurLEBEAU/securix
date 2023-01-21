@@ -1,0 +1,64 @@
+{% extends '../adminLayout.njk' %} 
+{% set title = 'Faq' %}  
+{% set isActive = 'faq' %} 
+{% set pageKey = 'faq' %} 
+ {% block css %} 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css">
+ {% endblock %}
+{% block content %}
+    <div>
+        <div class="table_header" >
+                        <h3>FAQ ADMIN</h3>
+
+                        <button class="btn_create"><span>Creer</span> <i class="fa fa-plus-circle"></i> </button>
+                    </div>
+                    <table id="faqTable" class="table table-striped table-bordered display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Question</th>
+                                <th>Create at</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+    </div>
+{% endblock %}
+{% block pop_up %}
+    <div class="pop_frame">
+        <span class="close_btn"> <i class="fa fa-plus"></i> </span>
+        <form action="#" method="post" id="form_modal">
+            <h1>Nouvelle Question</h1>
+            <div class="fom_control">
+                <label for="name">Nom</label>
+                <input type="text" required name="name" id="name">
+            </div>
+            <div class="fom_control">
+                <label for="name">Email</label>
+                <input type="email" required name="email" id="email">
+            </div>
+            <div class="fom_control">
+                <label for="question">Question</label>
+                <textarea name="question" id="question"></textarea>
+            </div>
+            <div class="fom_control">
+                <label for="response">Reponse</label>
+                <textarea name="response" id="response"></textarea>
+            </div>
+
+            <button type="submit">creer</button>
+        </form>
+    </div>
+
+{% endblock pop_up %}
+
+ {% block js %} 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/assets/js/api/faq.js" type="module"></script>
+ {% endblock %}

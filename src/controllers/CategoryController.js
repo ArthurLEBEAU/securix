@@ -16,11 +16,10 @@
              const filters = req.query.cat_type ? { cat_type: req.query.cat_type } : {}
              let data = await Category.find(filters);
              res.status(HttpResponse.OK);
-             return res.send(data);
+             return res.send({ categories: this.serealize(data) });
          } catch (error) {
              res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-             console.log("code error ", error)
-             return res.send(error);
+             return res.send({ error: "une erreur c'est produite!" });
          }
      }
 
@@ -33,19 +32,26 @@
      async save(req, res) {
 
          const dataVal = (new CategoryValidator()).validatePost(req.body)
-         console.log(dataVal)
+
          if (dataVal.error) {
              res.status(HttpResponse.UNPROCESSABLE_ENTITY);
              return res.send(dataVal);
          }
 
+
+
          try {
+             const cat = await Category.findOne({ name: dataVal.name, cat_type: dataVal.cat_type })
+             if (cat) {
+                 res.status(HttpResponse.CONFLICT);
+                 return res.send({ error: "this categorie is already used!" });
+             }
              const data = await Category.create(dataVal);
              res.status(HttpResponse.OK);
              return res.send(data);
          } catch (error) {
              res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-             return res.send({ error });
+             return res.send({ error: "une erreur c'est produite!" });
          }
      }
 
@@ -64,7 +70,7 @@
                  return res.send({ data: data });
              } else {
                  res.status(HttpResponse.NOT_FOUND);
-                 return res.send({ message: `${req.params.id} does not corresponde to any Category` })
+                 return res.send({ message: `${req.params.id} ne correspond à aucune categorie` })
              }
          } catch (error) {
              if (error.name == 'CastError') {
@@ -72,7 +78,7 @@
              } else {
                  res.status(HttpResponse.INTERNAL_SERVER_ERROR);
              }
-             return res.send({ message: error.message });
+             return res.send({ error: "une erreur c'est produite!" });
          }
      }
 
@@ -91,17 +97,27 @@
          }
 
          try {
-             let data = await Category.updateOne({ _id: req.params.id }, data);
-             if (data.modifiedCount == 1 || data.matchedCount == 1) {
+
+             if (data.name && data.cat_type) {
+                 const cat = await Category.findOne({ name: data.name, cat_type: data.cat_type })
+                 if (cat) {
+                     res.status(HttpResponse.CONFLICT);
+                     return res.send({ error: "cette categorie existe déja!" });
+                 }
+             }
+
+             let cat = await Category.updateOne({ _id: req.params.id }, data);
+
+             if (cat.modifiedCount == 1 || cat.matchedCount == 1) {
                  res.status(HttpResponse.OK);
-                 return res.send({ message: "data modifier avec success!" });
+                 return res.send({ message: "une categorie modifier avec success!" });
              } else {
                  res.status(HttpResponse.NOT_FOUND);
-                 return res.send({ message: `${req.params.id} does not corresponde to any data` })
+                 return res.send({ message: `${req.params.id} ne correspond à aucune categorie` })
              }
          } catch (error) {
              res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-             return res.send({ error });
+             return res.send({ error: "une erreur c'est produite!" });
          }
      }
 
@@ -115,16 +131,37 @@
          let data = await Category.findOne({ _id: req.params.id });
          if (data == null) {
              res.status(HttpResponse.NOT_FOUND);
-             return res.send({ message: `${req.params.id} does not corresponde to any data` })
+             return res.send({ message: `${req.params.id} ne correspond à aucune categorie` })
          }
          try {
-             await Category.remove({ _id: req.params.id });
+             await Category.deleteOne({ _id: req.params.id });
              res.status(HttpResponse.OK);
-             return res.send({ message: 'one ow removed' });
+             return res.send({ message: 'une categorie supprimer!' });
          } catch (error) {
              res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-             return res.send({ error });
+             return res.send({ error: "une erreur c'est produite!" });
          }
+     }
+
+     /**
+      * 
+      * @param {Array} categories 
+      * @returns {Array}
+      */
+     serealize(categories) {
+         let catV = []
+         categories.forEach((cat, index) => {
+             catV.push({
+                 id: index + 1,
+                 _id: cat._id,
+                 name: cat.name,
+                 description: cat.description,
+                 type: cat.cat_type,
+                 created_at: (new Date(cat.created_at)).toLocaleString(),
+             })
+         });
+
+         return catV
      }
 
 

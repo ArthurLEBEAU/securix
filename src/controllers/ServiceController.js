@@ -19,10 +19,10 @@ export default class ServiceController {
         try {
             let services = await Service.find().populate("cat_id", "name + _id");
             res.status(HttpResponse.OK);
-            return res.send(services);
+            return res.send({ service: this.serealize(services) });
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send(error);
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -50,7 +50,7 @@ export default class ServiceController {
         const cat = Category.findOne({ _id: data.cat_id });
         if (cat == null) {
             res.status(HttpResponse.NOT_FOUND);
-            return res.send({ message: "la categorie n'existe pas!" });
+            return res.send({ error: "la categorie n'existe pas!" });
         }
         // check and send the file
         try {
@@ -61,7 +61,7 @@ export default class ServiceController {
             data.cover = sf.path
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
 
         try {
@@ -70,7 +70,7 @@ export default class ServiceController {
             return res.send(service);
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -89,7 +89,7 @@ export default class ServiceController {
                 return res.send(service);
             } else {
                 res.status(HttpResponse.NOT_FOUND);
-                return res.send({ message: `${req.params.id} does not corresponde to any service` })
+                return res.send({ message: `${req.params.id} ne correspond à aucun service !` })
             }
         } catch (error) {
             if (error.name == 'CastError') {
@@ -97,7 +97,7 @@ export default class ServiceController {
             } else {
                 res.status(HttpResponse.INTERNAL_SERVER_ERROR);
             }
-            return res.send({ message: error.message });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -129,20 +129,20 @@ export default class ServiceController {
             const cat = Category.findOne({ _id: data.cat_id });
             if (cat == null) {
                 res.status(HttpResponse.NOT_FOUND);
-                return res.send({ message: "la categorie n'existe pas!" });
+                return res.send({ error: "la categorie n'existe pas!" });
             }
         }
         if (req.files) {
             data['cover'] = req.files.cover
             try {
-                const sf = await FileController.saveFile(data.cover, 'article')
+                const sf = await FileController.saveFile(data.cover, 'service')
                 if (Object.keys(sf).includes('error')) {
                     throw sf
                 }
                 path = sf.path
             } catch (error) {
                 res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-                return res.send({ error });
+                return res.send({ error: "une erreur c'est produite!" });
             }
         }
 
@@ -151,14 +151,14 @@ export default class ServiceController {
             let service = await Service.updateOne({ _id: req.params.id }, data).populate("cat_id", "name + _id");
             if (service.modifiedCount == 1 || service.matchedCount == 1) {
                 res.status(HttpResponse.OK);
-                return res.send({ message: "service modifier avec success!" });
+                return res.send({ message: "service modifié avec success!" });
             } else {
                 res.status(HttpResponse.NOT_FOUND);
-                return res.send({ message: `${req.params.id} does not corresponde to any service` })
+                return res.send({ message: `${req.params.id} ne correspond à aucun service` })
             }
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -173,7 +173,7 @@ export default class ServiceController {
         let service = await Service.findOne({ _id: req.params.id });
         if (service == null) {
             res.status(HttpResponse.NOT_FOUND);
-            return res.send({ message: `${req.params.id} does not corresponde to any service` })
+            return res.send({ message: `${req.params.id} ne corespond à aucun service` })
         }
         try {
             let rs = FileController.dropFile(service.cover)
@@ -183,10 +183,35 @@ export default class ServiceController {
                 return res.send({ message: rs.error });
             }
             res.status(HttpResponse.OK);
-            return res.send({ message: 'one service removed' });
+            return res.send({ message: 'service supprimé !' });
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error });
+            return res.send({ error: "une erreur c'est produite!" });
         }
+    }
+
+    /**
+     * 
+     * @param {Array} sevices 
+     * @returns {Array}
+     */
+    serealize(sevices) {
+        let servV = []
+        sevices.forEach((serv, index) => {
+            servV.push({
+                id: index + 1,
+                _id: serv._id,
+                title: serv.title,
+                cover: serv.cover,
+                description: serv.description,
+                categorie: {
+                    _id: serv.cat_id._id,
+                    name: serv.cat_id.name,
+                },
+                created_at: (new Date(serv.created_at)).toLocaleString(),
+            })
+        });
+
+        return servV
     }
 }

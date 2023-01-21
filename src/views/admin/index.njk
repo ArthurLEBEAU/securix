@@ -1,0 +1,27 @@
+{% extends '../adminLayout.njk' %} 
+{% set title = 'Home' %}  
+{% set isActive = 'home' %} 
+{% set pageKey = 'home' %} 
+{% block content %}
+    <div>
+                    <div class="cards_list">
+                        <div class="card">
+                            <i class="fa-solid fa-file"></i>
+                            <h3>{{ articles  }} <br> Article(s)</h3>
+                        </div>
+                        <div class="card">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                            <h3> {{ services }} <br> Service(s)</h3>
+                        </div>
+                        <div class="card">
+                            <i class="fa-solid fa-mail-bulk"></i>
+                            <h3> {{ msg }} <br> Message(s)</h3>
+                        </div>
+                        <div class="card">
+                            <i class="fa-solid fa-clipboard-question"></i>
+                            <h3> {{ faq }} <br> FAQ(s)</h3>
+                        </div>
+                    </div>
+                    <p>Bienvenue <br> sur l'administration de securix</p>
+                </div>
+{% endblock %}

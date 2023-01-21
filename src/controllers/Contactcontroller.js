@@ -15,11 +15,10 @@ export default class ContactController {
         try {
             let data = await Contact.find()
             res.status(HttpResponse.OK)
-            return res.send(data)
+            return res.send({ contacts: this.serealize(data) })
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR)
-            console.log('code error ', error)
-            return res.send(error)
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -41,7 +40,7 @@ export default class ContactController {
             return res.send(r._id)
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR)
-            return res.send({ error })
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -60,7 +59,7 @@ export default class ContactController {
             } else {
                 res.status(HttpResponse.NOT_FOUND)
                 return res.send({
-                    message: `${req.params.id} does not corresponde to any Contact`,
+                    error: `${req.params.id} ne correspond à aucun message`,
                 })
             }
         } catch (error) {
@@ -69,7 +68,7 @@ export default class ContactController {
             } else {
                 res.status(HttpResponse.INTERNAL_SERVER_ERROR)
             }
-            return res.send({ message: error.message })
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -89,16 +88,16 @@ export default class ContactController {
             let data = await Contact.updateOne({ _id: req.params.id }, req.body)
             if (data.modifiedCount == 1 || data.matchedCount == 1) {
                 res.status(HttpResponse.OK)
-                return res.send({ message: 'data modifier avec success!' })
+                return res.send({ message: 'message modifié avec success!' })
             } else {
                 res.status(HttpResponse.NOT_FOUND)
                 return res.send({
-                    message: `${req.params.id} does not corresponde to any data`,
+                    message: `${req.params.id} ne correspond à aucun message`,
                 })
             }
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR)
-            return res.send({ error })
+            return res.send({ error: "une erreur c'est produite!" });
         }
     }
 
@@ -113,7 +112,7 @@ export default class ContactController {
         if (data == null) {
             res.status(HttpResponse.NOT_FOUND)
             return res.send({
-                message: `${req.params.id} does not corresponde to any data`,
+                message: `${req.params.id} ne correspond à aucun message`,
             })
         }
         try {
@@ -122,7 +121,28 @@ export default class ContactController {
             return res.send({ message: 'one ow removed' })
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR)
-            return res.send({ error })
+            return res.send({ error: "une erreur c'est produite!" });
         }
+    }
+
+    /**
+     * 
+     * @param {Array} contacts 
+     * @returns {Array}
+     */
+    serealize(contacts) {
+        let persV = []
+        contacts.forEach((pers, index) => {
+            persV.push({
+                id: index + 1,
+                _id: pers._id,
+                name: pers.name,
+                email: pers.email,
+                description: pers.description,
+                created_at: (new Date(pers.created_at)).toLocaleString(),
+            })
+        });
+
+        return persV
     }
 }

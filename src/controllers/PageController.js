@@ -121,20 +121,26 @@ export default class PageController {
             return res.render('global/about.njk');
         }
         /**
-         * return the sevice page
+         * return the single article
          * @param {Express.Request} req 
          * @param {Express.Response} res 
          * @returns Express.res
          */
     async single(req, res) {
-        const article = await Blog.findOne({ _id: req.params.id }).populate("cat_id", "name + _id");
-        let articles = await Blog.find({ cat_id: article.cat_id._id }).populate("cat_id", "name + _id");
-        if (article != null) {
-            res.status(HttpResponse.OK);
-            return res.render('global/single.njk', { article, articles });
-        } else {
+        try {
+            const article = await Blog.findOne({ _id: req.params.id }).populate("cat_id", "name + _id");
+
+            if (article != null) {
+                let articles = await Blog.find({ cat_id: article.cat_id._id }).populate("cat_id", "name + _id");
+                res.status(HttpResponse.OK);
+                return res.render('global/single.njk', { article, articles });
+            } else {
+                res.status(HttpResponse.NOT_FOUND);
+                return res.render('global/blog.njk');
+            }
+        } catch (error) {
             res.status(HttpResponse.NOT_FOUND);
-            return res.render('global/blog.njk');
+            return res.render('404.njk', { url: req.url });
         }
     }
 

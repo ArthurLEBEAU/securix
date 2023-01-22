@@ -2,7 +2,7 @@ import { dataTableTranslation } from "../helper.js";
 
 
 $(document).ready(async function() {
-    const _url = 'http://localhost:3000/api/article/';
+    const _url = '/api/article/';
     let articleDataTable = $('#articlesTable').DataTable({
         ajax: {
             url: _url,

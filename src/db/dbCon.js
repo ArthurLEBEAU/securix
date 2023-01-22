@@ -12,7 +12,12 @@ import * as models from '../models/index.js'
 export default class DBConnexion {
     constructor() {
         this.connection = null
-        this.uri = `mongodb://${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+        if (process.env.ENV == 'production') {
+            this.uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_MDP}@${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authMechanism=DEFAULT&authSource=${process.env.AUTH_DB}`;
+        } else {
+            this.uri = `mongodb://${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+
+        }
         this.option = {
             useNewUrlParser: true,
             useUnifiedTopology: true

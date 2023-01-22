@@ -577,7 +577,7 @@ HOME
 }
 
 #home .about .about_content .about_img {
-    max-height: 400px;
+    max-height: 465px;
     overflow: hidden;
 }
 
@@ -747,6 +747,12 @@ HOME
 .divider {
     text-align: center;
     min-height: 25vh;
+}
+
+.divider .wrapper a {
+    color: var(--section-overlay);
+    font-size: 1rem;
+    text-decoration: underline;
 }
 
 .divider:not(.statistique) .wrapper {

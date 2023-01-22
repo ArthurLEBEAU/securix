@@ -38,15 +38,6 @@ var allowedOrigins = ['http://127.0.0.1:5500/'];
 
 // secure header
 // app.use(helmet());
-// setup session and session tips
-// const strategie = function(username, password, done) {
-//     User.findOne({ username: username }, function(err, user) {
-//         if (err) { return done(err); }
-//         if (!user) { return done(null, false); }
-//         if (!user.verifyPassword(password)) { return done(null, false); }
-//         return done(null, user);
-//     });
-// }
 app.set('trust proxy', 1)
 app.use(session({
     secret: process.env.SECRET_KEY,
@@ -102,7 +93,6 @@ app.use("/api", apiRoute)
 app.use("/", webRoute)
 
 
-// Handle all unhandled errors:
 // lauch the server on the specific prot
 app.listen(process.env.PORT || 3001, () => {
     console.log(`server is listening to port http://localhost:${process.env.PORT}`)

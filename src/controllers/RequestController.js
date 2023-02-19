@@ -47,8 +47,7 @@ export default class RequestController {
                 return res.send({ error: "cette question existe deja!" });
             }
 
-
-            if (!data["response"]) data["response"] = ""
+            if (req.body.reponse) data["reponse"] = req.body.reponse
             const request = await Request.create(data);
             res.status(HttpResponse.OK);
             return res.send(request["_id"]);
@@ -108,7 +107,7 @@ export default class RequestController {
                 }
             }
 
-
+            if (req.body.reponse) data["reponse"] = req.body.reponse
             let request = await Request.updateOne({ _id: req.params.id }, data);
             if (request.modifiedCount == 1 || request.matchedCount == 1) {
                 res.status(HttpResponse.OK);
@@ -160,7 +159,7 @@ export default class RequestController {
                 name: qt.name,
                 email: qt.email,
                 question: qt.question,
-                response: qt.response,
+                response: qt.reponse,
                 created_at: (new Date(qt.created_at)).toLocaleString(),
             })
         });

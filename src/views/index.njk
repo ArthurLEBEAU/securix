@@ -8,7 +8,7 @@
 <section class="hero d-flex jc-c ai-c">
     <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
     <div class="wrapper">
-        <h1>Avec <span>SECUREX</span> <br> assurer vous en toute sécurité .</h1>
+        <h1>Avec <span>SECURIX</span> <br> assurez-vous en toute TRANQUILLITE D’ESPRIT.</h1>
         <p>Nous déployons nos efforts en assurance et en réassurance pour trouver les couvertures adaptées à vos besoins en tenant compte de vos contraintes budgétaires et de la nécessité d’accélérer le règlement des sinistres. Cette approche vous permet d’économiser de l’argent, de gagner en confiance, et de vous concentrer sur vos véritables priorités. </p>
         <a href="/contact" class="btn bn-main">Commencer</a>
     </div>
@@ -30,7 +30,7 @@ La recherche des couvertures adaptées aux besoins de la clientèle et L’accom
             {% for service in services %}
                 <div class="services_content_card">
                     <img src="/static{{service.cover}}" alt="image decrivant le service de l'entreprise">
-                    <a href="#" class="services_content_card_text">{{ service.title }}</a>
+                    <a href="/services" class="services_content_card_text">{{ service.title }}</a>
                     {# <a href="#" class="services_content_card_text">Le règlement <span>rapide des sinistres</span></a> #}
                 </div>
             {% endfor %}
@@ -42,7 +42,11 @@ La recherche des couvertures adaptées aux besoins de la clientèle et L’accom
 <section class="divider bg-main d-flex jc-c ai-c">
     <div class="wrapper">
         <h1>Rejoignez-nous vite !</h1>
-        <p>Vous avez un besoin? une question? Rejoignez- nous maintenant via les canaux ci-après : par mail à info@securix-assurance.com  ou sur notre page <a href="/contact">contact</a></p>
+        <p>Vous avez un besoin d’assurance ? Une question ? Rejoignez-nous maintenant via les canaux ci-après :
+            <ul style="display: flex;justify-content: flex-start;width: fit-content;margin: 0 auto; flex-wrap: wrap; flex-direction: column;">
+                <li style="width: fit-content; text-align: left;">- info@securix-assurance.com </li>
+                <li style="width: fit-content; text-align: left;"> - sur notre page <a href="/contact">contact</a></li>
+            </ul>
     </div>
 </section>
 <!-- section divider end -->
@@ -97,7 +101,7 @@ La recherche des couvertures adaptées aux besoins de la clientèle et L’accom
 <section class="about d-flex jc-c ai-c">
     <div class="wrapper">
         <div class="section_title">
-            <h2 class="title_text">securex</h2>
+            <h2 class="title_text">securix</h2>
             <span class="title_background">A PROPOS</span>
         </div>
         <div class="about_content d-flex jc-c ai-s">
@@ -106,17 +110,17 @@ La recherche des couvertures adaptées aux besoins de la clientèle et L’accom
             </div>
             <div class="about_text">
                 <h1 class="about_title">Qui sommes nous ?</h1>
-                <p>SECURIX ASSURANCES est une SARL agréée par les autorités ivoiriennes de régulation des assurances sous le numéro 0315/MEF/DGTCP/DA DU 02/09/2021.
-
-Elle est située à Abidjan dans la commune de Cocody angré 7ème tranche non loin du pont Soro.
-Aujourd’hui, SECURIX ASSURANCES se positionne également sur le digital dans le but de faciliter l’accès à l’assurance pour tous en Côte d’Ivoire. Par ailleurs, l’entité met au quotidien son expertise au service de ses clients tout en apportant des solutions sur l’ensemble des branches de l’assurance (IARD et Vie) en partenariat avec les plus importantes compagnies d’assurances du marché ivoirien.
-
-En outre, SECURIX ASSURANCES se distingue du marché avec des services à valeur ajoutée à savoir le consulting, la gestion et le règlement des sinistres…
-
-Nous avons pour mission de soutenir les personnes morales notamment les petites et moyennes entreprises (PME) dans leurs problématiques d’assurance avec des offres adaptées, également les personnes physiques de façon collective et individuelle.
-
-Par ailleurs, favoriser l’accès à l’assurance en Côte d’Ivoire en tirant profit de l’innovation numérique pour faciliter le quotidien des assurés, et apporter de la plus-value au marché à travers des solutions participatives et des prises d’initiatives avec les acteurs du marché.
-</p>
+                <p>
+                    SECURIX ASSURANCES SARL est une société de courtage agréée par les autorités ivoiriennes de régulation des assurances sous le numéro 0315/MEF/DGTCP/DA du 02/09/2021. Elle est située à Abidjan dans la Commune de Cocody Angré 7ème tranche non loin du pont SORO. <br>
+                    <br>
+                    Nous nous positionnons sur le digital pour demeurer proche de nos partenaires.
+                    <br>
+                    <br>
+                    Avec le soutien des compagnies d’assurances majeures du marché, nous apportons des solutions innovantes aux besoins diversifiés des assurés à travers des services à valeur ajoutée tels que le consulting, la gestion des contrats et le règlement des sinistres.<br>
+                    <br>
+                    Notre mission est de soutenir les personnes physiques prises tant individuellement que collectivement. Elle s’étend aussi aux personnes morales notamment aux Petites et Moyennes Entreprises (PME) dans leurs problématiques de gestion des risques et de leur transfert aux sociétés d’assurances. Un autre aspect est de favoriser l’accès à l’assurance dans notre pays en tirant profit de l’innovation numérique pour faciliter le quotidien des assurés. Enfin, nous voudrions apporter de la plus-value au marché à travers des solutions participatives et des prises d’initiatives avec les acteurs du marché.
+                    <br>
+                </p>
                 <a href="/contact" class="btn bn-main">Contacter Nous</a>
             </div>
         </div>
@@ -125,14 +129,9 @@ Par ailleurs, favoriser l’accès à l’assurance en Côte d’Ivoire en tiran
 <!-- section abouts end -->
 <!-- section divider start -->
 <section class="divider statistique bg-main d-flex jc-c ai-c">
-    <div class="wrapper d-flex jc-c ai-c">
-        <h1>Nos <br> statistiques</h1>
-        <div class="stats d-flex jc-betw ai-c">
-            <span class="stat">10K <br> clients</span>
-            <span class="stat">10K <br> clients</span>
-            <span class="stat">10K <br> clients</span>
-            <span class="stat">10K <br> clients</span>
-        </div>
+    <div class="wrapper">
+        <h1>Demandez plus</h1>
+        <p> Comme vous êtes notre priorité, nous avons mis en place un système qui vous permet d’envoyer  <a href="/faq">des questions</a> et nous nous chargerons de vous répondre dans un delais de 24h maximum, car la proximité est l’essence même de notre métier.</p>
     </div>
 </section>
 <!-- section divider end -->

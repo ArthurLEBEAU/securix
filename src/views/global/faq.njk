@@ -18,7 +18,7 @@
             <div class="wrapper">
                 {# lister les questions #}
                 {% for q in questions %}
-                    {% if q.response %}
+                    {% if q.reponse %}
                         <div class="incomming d-flex ai-s jc-c">
                             <span class="incomming_profil">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="31.5" viewBox="0 0 31.5 31.5">
@@ -33,7 +33,7 @@
                         <div class="outcomming d-flex ai-s jc-c">
                             <div class="outcomming_question p-relative">
                                 <i class="fa-regular fa-play p-absolute"></i>
-                                <p><p>{{ q.response }}</p></p>
+                                <p><p>{{ q.reponse }}</p></p>
                             </div>
                             <span class="outcomming_profil">
                                 <img src="/static/assets/images/logo.png" alt="logo de l'entrprise">
@@ -42,26 +42,6 @@
                     {% endif %}
                 {% endfor %}
                 {# fin #}
-                <div class="incomming d-flex ai-s jc-c">
-                    <span class="incomming_profil">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="31.5" viewBox="0 0 31.5 31.5">
-                            <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M29.25,14.625H19.125V4.5a2.25,2.25,0,0,0-2.25-2.25h-2.25a2.25,2.25,0,0,0-2.25,2.25V14.625H2.25A2.25,2.25,0,0,0,0,16.875v2.25a2.25,2.25,0,0,0,2.25,2.25H12.375V31.5a2.25,2.25,0,0,0,2.25,2.25h2.25a2.25,2.25,0,0,0,2.25-2.25V21.375H29.25a2.25,2.25,0,0,0,2.25-2.25v-2.25A2.25,2.25,0,0,0,29.25,14.625Z" transform="translate(0 -2.25)" fill="#fff"/>
-                          </svg>
-                    </span>
-                    <div class="incomming_question p-relative">
-                        <i class="fa-regular fa-play p-absolute"></i>
-                        <p>Comment SECURIX procède pour faire baisser le coût de l’assurance de son client ?</p>
-                    </div>
-                </div>
-                <div class="outcomming d-flex ai-s jc-c">
-                    <div class="outcomming_question p-relative">
-                        <i class="fa-regular fa-play p-absolute"></i>
-                        <p>Par son expertise, SECURIX utilise des comparaisons de prix des assureurs pour trouver la couverture souhaitée en prenant en compte les contraintes budgétaires de son client. </p>
-                    </div>
-                    <span class="outcomming_profil">
-                        <img src="/static/assets/images/logo.png" alt="logo de l'entrprise">
-                    </span>
-                </div>
             </div>
         </section>
         <!-- section message wall end -->

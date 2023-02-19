@@ -13,7 +13,8 @@ export default class FileController {
      * @param {String} _path 
      */
     static async saveFile(file, _directory) {
-        const directory = path.dirname('public') + `/public/assets/${_directory}/`;
+	    
+        const directory = path.dirname('public')+`/public/assets/${_directory}/`;
         const timeStamp = Date.now().toString()
         const filePath = `${directory}${timeStamp}_${file.name}`;
         const fileTypes = /jpeg|jpg|png|PNG|JPEG|JPG/;
@@ -34,7 +35,7 @@ export default class FileController {
             return { path: `/assets/${_directory}/${timeStamp}_${file.name}` }
 
         } catch (error) {
-            return { error: error }
+            return { error }
         }
     }
 

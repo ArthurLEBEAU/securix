@@ -5,7 +5,7 @@ const route = new Route()
 
 // route about faq
 await route.get("/request", 'RequestController', 'index', true)
-await route.post("/request", 'RequestController', 'save', true)
+await route.post("/request", 'RequestController', 'save')
 await route.get("/request/:id", 'RequestController', 'single', true)
 await route.delete("/request/:id", 'RequestController', 'remove', true)
 await route.patch("/request/:id", 'RequestController', 'update', true)

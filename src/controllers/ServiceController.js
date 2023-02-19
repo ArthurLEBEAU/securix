@@ -56,8 +56,10 @@ export default class ServiceController {
         try {
             const sf = await FileController.saveFile(data.cover, 'service')
             if (Object.keys(sf).includes('error')) {
-                throw sf
+              
+		    throw sf
             }
+	
             data.cover = sf.path
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
@@ -70,7 +72,7 @@ export default class ServiceController {
             return res.send(service);
         } catch (error) {
             res.status(HttpResponse.INTERNAL_SERVER_ERROR);
-            return res.send({ error: "une erreur c'est produite!" });
+            return res.send({ error: "une erreur c'est produite!", errorzs: error });
         }
     }
 

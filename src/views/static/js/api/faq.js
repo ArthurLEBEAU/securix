@@ -113,7 +113,7 @@ $(document).ready(async function() {
                 url: _url,
                 method: 'post',
                 contentType: 'application/json',
-                data: JSON.stringify({ name: _name, email: _email, question: _question, response: _response }),
+                data: JSON.stringify({ name: _name, email: _email, question: _question, reponse: _response }),
                 success: function(data) {
                     submitBtn.textContent = "enregistrer"
                     issubmitting = false
@@ -156,7 +156,7 @@ $(document).ready(async function() {
                 url: _url + current_id,
                 method: 'patch',
                 contentType: 'application/json',
-                data: JSON.stringify({ name: _name, cat_type: _type, description: _description }),
+                data: JSON.stringify({ name: _name, email: _email, question: _question, reponse: _response }),
                 success: function(data) {
                     submitBtn.textContent = "modifier"
                     issubmitting = false

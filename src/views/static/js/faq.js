@@ -1,4 +1,4 @@
-import { dataTableTranslation } from "../helper.js";
+import { dataTableTranslation } from "./helper.js";
 
 
 $(document).ready(async function() {

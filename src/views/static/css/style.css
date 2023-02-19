@@ -744,6 +744,20 @@ HOME
     color: var(--main-color);
 }
 
+#home .contact-section-list {
+    display: flex;
+    justify-content: flex-start;
+    width: fit-content;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#home .contact-section-list li {
+    width: fit-content;
+    text-align: left;
+}
+
 .divider {
     text-align: center;
     min-height: 25vh;
@@ -957,6 +971,88 @@ SERVICES
 
 #service .services .services_footer .wrapper svg {
     fill: var(--main-color);
+}
+
+#service .blueTable {
+    margin: 1rem auto;
+}
+
+#service .products_wrapper_desc {
+    text-align: center;
+}
+
+#service .products_wrapper_desc .products_content_text {
+    margin-top: 1rem;
+}
+
+#service table {
+    border-spacing: 2px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#service table.blueTable th {
+    padding: .5rem 1rem;
+    text-transform: uppercase;
+}
+
+#service table.blueTable th,
+#service table.blueTable td {
+    border: solid 1px #222;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+}
+
+#service table.blueTable td svg {
+    width: 20px;
+    margin-right: .4rem;
+    fill: var(--main-color);
+}
+
+#service table.blueTable tr td:first-of-type div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#service table.blueTable td:not(:first-of-type) span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    padding: .1rem;
+}
+
+#service table.blueTable span.true {
+    background-color: rgb(101, 224, 101);
+}
+
+#service table.blueTable span.false {
+    background-color: rgb(224, 101, 101);
+}
+
+@media screen and (max-width: 569px) {
+    #service table.blueTable tr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    #service table.blueTable tr th,
+    #service table.blueTable tr td {
+        width: 50%;
+    }
+    #service table.blueTable tr th:first-of-type,
+    #service table.blueTable tr td:first-of-type {
+        width: 100%;
+    }
+    #service table.blueTable tr td:first-of-type div {
+        justify-content: center;
+    }
 }
 
 

@@ -38,6 +38,8 @@ await route.get("/contact/:id", 'ContactController', 'single', true)
 await route.delete("/contact/:id", 'ContactController', 'remove', true)
 await route.patch("/contact/:id", 'ContactController', 'update', true)
 
+// await route.post('/register', 'AuthController', 'register', false)
+
 // account routes
 await route.post("/account", 'AuthController', 'account', true)
 

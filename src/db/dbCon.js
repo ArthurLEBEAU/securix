@@ -6,7 +6,7 @@ import * as models from '../models/index.js'
 /**
  *create an instance of database connexion
  *
- * @export
+ * @export 
  * @class DBConnexion
  */
 export default class DBConnexion {
@@ -25,8 +25,8 @@ export default class DBConnexion {
     }
 
     /**
-     * 
-     * @param {boolean} reset 
+     *
+     * @param {boolean} reset
      */
     async createConnection(reset = false) {
         try {
@@ -45,6 +45,7 @@ export default class DBConnexion {
     }
 
     initDb() {
+        console.log('init db');
             const d = {...models }
             Object.keys(d).forEach((el, i) => {
                 const p = Object.values(d)[i]

@@ -33,6 +33,7 @@ const db = new DBConnexion()
 // connect to the db
 await db.createConnection()
 
+
 // all allowed origin
 var allowedOrigins = ['http://127.0.0.1:5500/'];
 

@@ -1,13 +1,73 @@
-{% extends 'layout.njk' %} 
-{% set title = 'COMPARATEUR' %} 
+{% extends 'layout.njk' %}
+{% block head %}
+{# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css"/> #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/cdb.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+ {% endblock %}
+{% set title = 'COMPARATEUR' %}
 {% set pageKey = 'comparateur' %}
 {% block content %}
 <!-- section hero start -->
         <section class="hero d-flex jc-c ai-c">
             <img src="/static/assets/images/hero_bg.jpg" alt="background de la section hero" id="hero_bg">
             <div class="wrapper">
-                <h1>Des prix de luxe</h1>
+                <h1>Des prix de luxes</h1>
             </div>
         </section>
         <!-- section hero end -->
+        <!-- section services start -->
+        <section  >
+            <div class="services_wrapper_desc">
+                    <div class="section_title">
+                        <h2 class="title_text">Les services securix</h2>
+                    </div>
+                    <div class="services_content_text">
+                        <p>SECURIX ASSURANCES a de grandes ambitions pour sa clientèle à travers son engagement à offrir des services de qualité irréprochable dans la recherche des couvertures d’assurance et de réassurance en adéquation avec les besoins pertinents des clients.
+Découvrez tous nos services.</p>
+                    </div>
+                </div>
+                <div class="card-section-c">
+            <div class="card-c">
+                <h2 class="card-title-c">Service 1</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+
+            <div class="card-c">
+                <h2 class="card-title-c">Titre de la cartes</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+
+            <div class="card-c">
+                <h2 class="card-title-c">Titre de la cartes</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+            <div class="card-c">
+                <h2 class="card-title-c">Titre de la cartes</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+            <div class="card-c">
+                <h2 class="card-title-c">Titre de la cartes</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+            <div class="card-c">
+                <h2 class="card-title-c">Titre de la cartes</h2>
+                <p class="card-description-c">Description de la carte.</p>
+            </div>
+            </div>
+        </section>
+         <div>
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+    </div>
+        <!-- section services end -->
+ {% endblock %}
+
+ {% block js %}
+ <script>
+    console.log('hello')
+ </script>
  {% endblock %}

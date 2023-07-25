@@ -1980,3 +1980,34 @@ NOTFOUND
 
 
 /*# sourceMappingURL=style.css.map */
+
+/*
+    * Comparateur style
+*/
+
+.card-section-c {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    min-height: auto !important;
+}
+.card-c {
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    padding: 10px;
+    height: 200px;
+    background-color: #e6f7ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title-c {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .card-description-c {
+    font-size: 14px;
+    color: #666;
+  }

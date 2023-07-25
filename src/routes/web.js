@@ -8,6 +8,7 @@ await route.get("/services", 'PageController', 'service')
 await route.get("/contact", 'PageController', 'contact')
 await route.get("/blog", 'PageController', 'blog')
 await route.get("/a-propos", 'PageController', 'about')
+await route.get("/comparateur", 'PageController', 'comparator')
 await route.get("/blog/:id", 'PageController', 'single')
 
 // not found
